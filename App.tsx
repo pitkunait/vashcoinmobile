@@ -1,31 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React from 'react';
-import { SafeAreaView, StatusBar, StyleSheet, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Application from './src/navigation/Application';
+import { Provider } from 'react-redux';
+import store from './src/store';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Transaction from './src/core/Transaction';
 
 const App = () => {
     return (
-        <>
-            <StatusBar barStyle="dark-content" />
-            <SafeAreaView style={styles.body}>
-                <Text>Hello</Text>
-            </SafeAreaView>
-        </>
+        <Provider store={store}>
+            <SafeAreaProvider>
+                <NavigationContainer>
+                    <Application />
+                </NavigationContainer>
+            </SafeAreaProvider>
+        </Provider>
     );
 };
-
-const styles = StyleSheet.create({
-    body: {
-        flex: 1,
-    },
-});
 
 export default App;
