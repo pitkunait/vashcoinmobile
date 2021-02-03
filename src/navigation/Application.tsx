@@ -10,18 +10,6 @@ import Wallet from '../core/Wallet';
 const Tab = createBottomTabNavigator();
 
 const Application = () => {
-    useEffect(() => {
-        const tr = new Transaction({ amount: 123 });
-        const wl = new Wallet();
-        const signed = wl.signTransaction(tr);
-        console.log(signed.serialize());
-        postTransaction(signed)
-            .then((r) => {})
-            .catch((e) => {
-                console.log(e);
-            });
-    }, []);
-
     return (
         <Tab.Navigator>
             <Tab.Screen name="Chain" component={HomeScreen} />
