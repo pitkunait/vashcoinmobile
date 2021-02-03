@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    NativeSyntheticEvent,
-    TextInputChangeEventData,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { Button, Header, Input } from 'react-native-elements';
 import Transaction from '../core/Transaction';
 import Wallet from '../core/Wallet';
@@ -24,7 +18,9 @@ const SendScreen = () => {
         const signed = wl.signTransaction(transaction);
         console.log(signed.serialize());
         postTransaction(signed)
-            .then((r) => {})
+            .then((r) => {
+                console.log(r);
+            })
             .catch((e) => {
                 console.log(e);
             });

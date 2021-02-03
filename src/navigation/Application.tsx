@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import WalletScreen from '../screens/WalletScreen';
 import MineScreen from '../screens/MineScreen';
 import SendScreen from '../screens/SendScreen';
-import { postTransaction } from '../api/api';
-import Transaction from '../core/Transaction';
-import Wallet from '../core/Wallet';
+
 const Tab = createBottomTabNavigator();
 
 const Application = () => {
