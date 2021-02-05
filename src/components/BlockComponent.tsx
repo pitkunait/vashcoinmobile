@@ -7,7 +7,11 @@ const BlockComponent = (props: { block: BlockType }) => {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text>Block #{props.block.index}</Text>
-                <Text>{new Date(props.block.timestamp).toLocaleString()}</Text>
+                <Text>
+                    {new Date(props.block.timestamp * 1000).toLocaleString(
+                        'et',
+                    )}
+                </Text>
             </View>
 
             <Text>Transactions: {props.block.transactions.length}</Text>

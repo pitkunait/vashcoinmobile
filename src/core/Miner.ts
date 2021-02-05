@@ -1,39 +1,35 @@
 import Block from './Block';
 import { getTransactions } from '../api/api';
 import { BlockChainType } from '../types/BlockChainType';
+import Transaction from './Transaction';
+import { wallet } from './Wallet';
 
 class Miner {
-    constructor() {}
-
     async mine(chain: BlockChainType) {
         const lastBlock = chain[chain.length - 1];
-        let transactions;
+        let transactions: any[];
+        let response;
         try {
-            transactions = await getTransactions();
-            if (!transactions.data.transactions) {
+            response = await getTransactions();
+            if (!response.data.transactions) {
                 return;
             }
         } catch (e) {
             return;
         }
 
-        let nonce = 0;
-        let newBlock: Block;
-
-        newBlock = new Block({
+        transactions = response.data.transactions;
+        const reward = new Transaction({ recipient: wallet.id, amount: 10 });
+        transactions.push(wallet.signTransaction(reward));
+        const newBlock = new Block({
             index: lastBlock.index + 1,
-            transactions: transactions.data.transactions,
-            nonce,
+            transactions: transactions,
+            nonce: 0,
             previous_hash: lastBlock.hash,
         });
+
         while (true) {
-            nonce += 1;
-            newBlock = new Block({
-                index: lastBlock.index + 1,
-                transactions: transactions.data.transactions,
-                nonce,
-                previous_hash: lastBlock.hash,
-            });
+            newBlock.nonce += 1;
             if (newBlock.validatePOF()) {
                 newBlock.setHash();
                 break;
@@ -44,4 +40,4 @@ class Miner {
     }
 }
 
-export default Miner;
+export default new Miner();

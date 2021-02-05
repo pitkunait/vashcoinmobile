@@ -24,7 +24,7 @@ const ChainScreen = (props: PropsFromRedux) => {
         <>
             <Header
                 centerComponent={{
-                    text: 'VashCoin',
+                    text: 'BeerCoin',
                     style: { color: '#fff' },
                 }}
             />
